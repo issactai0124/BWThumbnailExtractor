@@ -27,7 +27,7 @@ class ConfigReader:
         elif __file__:
             cwd = os.path.dirname(__file__)
         else:
-            cwd = "/"
+            cwd = "./" # not sure what the case is here
         
         config_path = os.path.join(cwd, "config.ini") 
 
