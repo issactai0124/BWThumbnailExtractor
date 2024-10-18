@@ -22,7 +22,13 @@ class ConfigReader:
         return self._path
 
     def run(self):
-        cwd = os.getcwd()
+        if getattr(sys, 'frozen', False):
+            cwd = os.path.dirname(sys.executable)
+        elif __file__:
+            cwd = os.path.dirname(__file__)
+        else:
+            cwd = "/"
+        
         config_path = os.path.join(cwd, "config.ini") 
 
         config = configparser.ConfigParser()
