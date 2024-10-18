@@ -1,8 +1,6 @@
 # BW Thumbnail Extractor
 
-A python script to extract thumbnail images of BW files (files having the extension as .bw).
-
-Currently this repo contains only a script showing how a thumbnail can be extracted from a BW file.
+A python program to extract thumbnail images of BW files (files having the extension as .bw).
 
 ## Getting Started
 
@@ -14,38 +12,58 @@ Currently this repo contains only a script showing how a thumbnail can be extrac
 
 - (No dependencies)
 
+### Configuration
+
+The are 2 session, `DEFAULT` and `USER`, in the configuration file `config.ini`.
+
+1.  `USER`
+
+- `path`: path of the files to be loaded.
+
+2.  `DEFAULT` (no need to change the content)
+
+- `db_extension`: format of the files to be loaded.
+- `image_extension`: format of the thumbnail files to be generated.
+
 ### Executing program
 
-- Change line 4 of main.py: replace the path of BW file
-  - change only [path of bw file] in [r"path of bw file"], for example
-
-```bash
-path = r"C:\Users\Test User\Designer files\test.bw" ### change this
-```
-
-- run the Python script
+1. Run the Python code directly:
 
 ```bash
 python main.py
 ```
 
-## Motivation
+or
 
-In the fashion industry, one popular file format for desigmers to work is the Browzwear garment file format (BW).
+```bash
+python3 main.py
+```
 
-For a machine with a suitable software installed (e.g. [VStitcher](https://browzwear.com/products/v-stitcher)), a thumbnail is displayed when a BW file locally available is selected in a file browser.
+2. Run the executable (built separately).
 
-Companies may rely on cloud storages (e.g. [Microsoft OneDrive](https://www.microsoft.com/en/microsoft-365/onedrive/online-cloud-storage/)) so BW files can be accessed easily among staffs.
+### Expected behavior
 
-However most cloud storages do not support BW files, and thumnbail previews will not be displayed until the files are downloaded.
+1. Locate all the files of the extension `db_extension` under the folder `path` (including all subfolders).
+2. For each file located, check if the file of the same name with the extension `image_extension` is already found. If not, try extracting a thumbnail file with the file name aforementioned.
 
-This application aims to extract thumbnails as store as image files of the same name so that previews are available on cloud storages.
+- If the file is stored in a cloud storage and is not available locally, it will be downloaded first before extracting a thumbnail from it.
+- Skip to the next file if the extraction fails.
+
+### Log files
+
+A log file will be generated under the folder where this program is executed.
+`BwExtract_va.b_yyyymmddhhmmss.log`
+
+- `a.b` is the version number of this program.
+- `yyyymmddhhmmss` is the time when this program is started.
 
 ## Author
 
-Issac Tai [E-mail](issactai0124@gmail.com)
+Issac Tai (issactai0124@gmail.com)
 
 ## Version History
 
-- 0.1
+- 0.20
+  - Prototype
+- 0.10
   - Initial release of demo
